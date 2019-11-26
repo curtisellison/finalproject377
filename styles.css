@@ -1,0 +1,18 @@
+body {
+    background-color: black;
+    text-align: center;
+    color: white;
+}
+
+.header {
+    text-align: right;
+    background-color: green;
+    color: white;
+    font-size: 16px;
+}
+
+.button {
+    cursor: pointer;
+    font-family: Verdana;
+    font-size: 16px;
+}
