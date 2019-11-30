@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>LITTER TRACKING SITE</title>
+    <title>LITTER TRACKING SITE - Home</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
     <div class="page">
         <div class="outer">
-            <div class="header">
+            <p class="left">Tracker</p>
+            <p class="right">
                 <a href="#">Index</a>
                 <a href="#">About</a>
-                <a href="#">Documents</a>
+                <a href="#">Details</a>
+            </p>
+            <div class="header">
+                <h1>Home</h1>
             </div>
             <button class="button" onclick="console.log(trashmap());">Click me to bring up map.</button>
             <div class="content">
@@ -21,16 +25,20 @@
                 <div class="dropdown">
                     <button onclick="myFunction()" class="dropbtn">Filter by Litter Type</button>
                     <div id="DropdownOne" class="dropdown-content">
-                        <a href="#">Garbage Bags</a>
-                        <a href="#">Link Two</a>
-                        <a href="#">Link Three</a>
+                        <a href="#">All</a>
+                        <a href="#">Plastic</a>
+                        <a href="#">Glass</a>
+                        <a href="#">Metal</a>
                     </div>
 
                     <button onclick="myFunction()" class="dropbtn">Filter by Organization</button>
                     <div id="DropdownTwo" class="dropdown-content">
+                        <a href="#">Community Bridge</a>
                         <a href="#">DPW&T</a>
-                        <a href="#">Link Two</a>
-                        <a href="#">Link Three</a>
+                        <a href="#">DOC</a>
+                        <a href="#">DOE</a>
+                        <a href="#">CWP</a>
+                        <a href="#">DPIE</a>
                     </div>
 
                     <button onclick="myFunction()" class="dropbtn">Filter by Total Litter</button>

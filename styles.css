@@ -1,18 +1,43 @@
 body {
-    background-color: black;
+    background-color: white;
     text-align: center;
-    color: white;
+    color: black;
 }
 
 .header {
-    text-align: right;
-    background-color: green;
+    background-color: black;
     color: white;
-    font-size: 16px;
+    font-size: 18px;
+    height: 150px;
+    text-align: center;
 }
 
 .button {
     cursor: pointer;
     font-family: Verdana;
     font-size: 16px;
+}
+
+.content {
+    color: black;
+    text-align: left;
+}
+
+.left {
+    float: left;
+}
+
+.right{
+    float: right;
+}
+
+.filters {
+    background-color:white;
+}
+
+h1 {
+    height: 32px;
+    text-align: center;
+    line-height: 300%;
+    padding-right: 150px;
 }
