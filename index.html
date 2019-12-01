@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<meta charset="UTF-8"> 
 <head>
     <title>LITTER TRACKING SITE - Home</title>
     <link rel="stylesheet" href="styles.css">
@@ -23,7 +24,7 @@
             </div>
             <div class="filters">
                 <div class="dropdown">
-                    <button onclick="myFunction()" class="dropbtn">Filter by Litter Type</button>
+                    <button onclick="loadDataByLitterType()" class="dropbtn">Filter by Litter Type</button>
                     <div id="DropdownOne" class="dropdown-content">
                         <a href="#">All</a>
                         <a href="#">Plastic</a>
@@ -31,7 +32,7 @@
                         <a href="#">Metal</a>
                     </div>
 
-                    <button onclick="myFunction()" class="dropbtn">Filter by Organization</button>
+                    <button onclick="loadDataByOrganization()" class="dropbtn">Filter by Organization</button>
                     <div id="DropdownTwo" class="dropdown-content">
                         <a href="#">Community Bridge</a>
                         <a href="#">DPW&T</a>
@@ -41,7 +42,7 @@
                         <a href="#">DPIE</a>
                     </div>
 
-                    <button onclick="myFunction()" class="dropbtn">Filter by Total Litter</button>
+                    <button onclick="loadDataByTotalBagsLitter()" class="dropbtn">Filter by Total Litter</button>
                     <div id="DropdownTwo" class="dropdown-content">
                         <a href="#">DPW&T</a>
                         <a href="#">Link Two</a>
