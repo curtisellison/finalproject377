@@ -18,5 +18,16 @@
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-html": "^6.0.0",
     "eslint-plugin-import": "^2.18.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/curtisellison/finalproject377.git"
+  },
+  "keywords": [
+    "heroku"
+  ],
+  "bugs": {
+    "url": "https://github.com/curtisellison/finalproject377/issues"
+  },
+  "homepage": "https://github.com/curtisellison/finalproject377#readme"
 }
