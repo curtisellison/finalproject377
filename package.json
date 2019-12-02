@@ -27,7 +27,8 @@
     "heroku"
   ],
   "engines": {
-    "node": "12.12.0"
+    "node": "12.12.0",
+    "npm": "6.11.3"
   },
   "bugs": {
     "url": "https://github.com/curtisellison/finalproject377/issues"
