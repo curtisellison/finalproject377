@@ -4,6 +4,9 @@
 <head>
     <title>LITTER TRACKING SITE - Home</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+   crossorigin=""/>
 </head>
 
 <body>
@@ -18,9 +21,9 @@
             <div class="header">
                 <h1>Home</h1>
             </div>
-            <button class="button" onclick="console.log(trashmap());">Click me to bring up map.</button>
+            <button class="button" onclick="loadMap()">Click me to bring up map.</button>
             <div class="content">
-                <div class="map"></div>
+                <div id="mapid" class="map"></div>
             </div>
             <div class="filters">
                 <div class="dropdown">
@@ -54,5 +57,8 @@
         </div>
     </div>
     <script src="PGTrash.js"></script>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+   integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+   crossorigin=""></script>
 </body>
 </html>

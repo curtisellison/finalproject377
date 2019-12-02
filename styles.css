@@ -41,3 +41,7 @@ h1 {
     line-height: 300%;
     padding-right: 150px;
 }
+
+#mapid {
+     height: 180px;
+}

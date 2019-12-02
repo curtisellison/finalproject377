@@ -93,3 +93,7 @@ function loadDataByTotalBagsLitter() {
 	    	  return res;
 	      });      
 }
+
+function loadMap() {
+	var mymap = L.map('mapid').setView([38.9897, -76.9378], 13);
+}
