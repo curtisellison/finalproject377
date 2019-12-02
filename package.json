@@ -1,12 +1,23 @@
 {
-  "name": "finalproject377",
+  "name": "sample_server",
   "version": "1.0.0",
   "description": "A sample webserver to pull Prince George County Litter data and push it to a local page",
   "main": "project_server.js",
-  "dependencies": {},
-  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node project_server.js"
+  },
+  "author": "Thomas Nguyen",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.5.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-html": "^6.0.0",
+    "eslint-plugin-import": "^2.18.2"
   },
   "repository": {
     "type": "git",
@@ -15,13 +26,11 @@
   "keywords": [
     "heroku"
   ],
-  "author": "Thomas Nguyen",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/curtisellison/finalproject377/issues"
-  },
   "engines": {
     "node": "12.12.0"
+  },
+  "bugs": {
+    "url": "https://github.com/curtisellison/finalproject377/issues"
   },
   "homepage": "https://github.com/curtisellison/finalproject377#readme"
 }
