@@ -1,58 +1,182 @@
 <!DOCTYPE html>
-<html lang="en">
-<meta charset="UTF-8"> 
+<html>
 <head>
-    <title>LITTER TRACKING SITE - Home</title>
-    <link rel="stylesheet" href="styles.css">
+<title>LitterTracker</title>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link type="text/css" rel="stylesheet" href="styles.css">
+   <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+   integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+   crossorigin=""></script>
+   <script src="PGTrash.js"></script>
 </head>
 
-<body>
-    <div class="page">
-        <div class="outer">
-            <p class="left">Tracker</p>
-            <p class="right">
-                <a href="#">Index</a>
-                <a href="#">About</a>
-                <a href="#">Details</a>
-            </p>
-            <div class="header">
-                <h1>Home</h1>
-            </div>
-            <button class="button" onclick="console.log(trashmap());">Click me to bring up map.</button>
-            <div class="content">
-                <div class="map"></div>
-            </div>
-            <div class="filters">
-                <div class="dropdown">
-                    <button onclick="loadDataByLitterType()" class="dropbtn">Filter by Litter Type</button>
-                    <div id="DropdownOne" class="dropdown-content">
-                        <a href="#">All</a>
-                        <a href="#">Plastic</a>
-                        <a href="#">Glass</a>
-                        <a href="#">Metal</a>
-                    </div>
 
-                    <button onclick="loadDataByOrganization()" class="dropbtn">Filter by Organization</button>
-                    <div id="DropdownTwo" class="dropdown-content">
-                        <a href="#">Community Bridge</a>
-                        <a href="#">DPW&T</a>
-                        <a href="#">DOC</a>
-                        <a href="#">DOE</a>
-                        <a href="#">CWP</a>
-                        <a href="#">DPIE</a>
-                    </div>
+<body onload="loadMap()">
 
-                    <button onclick="loadDataByTotalBagsLitter()" class="dropbtn">Filter by Total Litter</button>
-                    <div id="DropdownTwo" class="dropdown-content">
-                        <a href="#">DPW&T</a>
-                        <a href="#">Link Two</a>
-                        <a href="#">Link Three</a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer"></div>
-        </div>
+<!-- Links (sit on top) -->
+<div class="top">
+  <div class="row padding black">
+    <div class="col s3">
+      <a href="#" class="button block black">HOME</a>
     </div>
-    <script src="PGTrash.js"></script>
+	<div class="col s3">
+      <a href="#" class="button block black">MAP</a>
+    </div>
+    <div class="col s3">
+      <a href="#about" class="button block black">ABOUT</a>
+    </div>
+    <div class="col s3">
+      <a href="#menu" class="button block black">DETAILS</a>
+    </div>
+  </div>
+</div>
+
+<!-- Header with image -->
+<header class="bgimg display-container grayscale-min" id="home">
+  <div class="display-middle center">
+    <span class="text-white" style="font-size:90px;font-weight: bold;background-color: white">LitterTracker</span>
+  </div>
+</header>
+
+<!-- Add a background color and large text to the whole page -->
+<div class="sand grayscale large">
+
+<div id="wrapper">
+  <div id="litter_type_filters">
+    <fieldset class="group">
+    <legend>Type of Litter</legend>
+      <div class="form-group" >
+        <input type="radio" name="filter" value="ltf_all" /><label>All</label>
+        <input type="radio" name="filter" value="ltf_plastic" /><label>Plastic</label>
+        <input type="radio" name="filter" value="ltf_glass" /><label>Glass</label>
+        <input type="radio" name="filter" value="ltf_metal" /><label>Metal</label>
+      </div>
+    </fieldset>
+  </div>
+  <div id="organization_filters">
+     <fieldset class="group">
+     <legend>Organization</legend>
+       <div class="form-group">
+         <input type="radio" name="filter" value="org_all" /><label>All</label>
+         <input type="radio" name="filter" value="org_community_bridge" /><label>Community Bridge</label>
+         <input type="radio" name="filter" value="org_dpwt" /><label>DPWT</label>
+         <input type="radio" name="filter" value="org_doc" /><label>DOC</label>
+         <input type="radio" name="filter" value="org_doe" /><label>DOE</label>
+         <input type="radio" name="filter" value="org_ccwp" /><label>CWP</label>
+         <input type="radio" name="filter" value="org_dpie" /><label>DPIE</label>
+       </div>
+     </fieldset>
+  </div>
+  <div id="total_litter_filters">
+     <fieldset class="group">
+     <legend>Total Litter</legend>
+       <div class="form-group">
+         <input type="radio" name="filter" value="tlf_all" /><label>All</label>
+         <input type="radio" name="filter" value="tlf_bags" /><label>Bags</label>
+         <input type="radio" name="filter" value="tlf_tires" /><label>Tires</label>         
+       </div>
+     </fieldset>
+  </div>
+</div>
+
+<!-- Map Container -->
+<div class="container" id="map">
+  <div class="content" style="max-width:100%">
+    <h5 class="center padding-64"><span class="tag wide">MAP</span></h5>
+	<div id="mapid" class="map" style="max-width:100%></div>
+   
+    <!--Implement filter buttons here -->
+  
+  </div>
+</div>
+
+<!-- About Container -->
+<div class="container" id="about">
+  <div class="content" style="max-width:700px">
+    <h5 class="center padding-64"><span class="tag wide">ABOUT LITTERTRACKER</span></h5>
+    <p>We are a website designed to help you figure out how efficently cleaning is being done throughout PGC.</p>
+    <p><strong>Contact Us:</strong> 1-800-700-3000.</p>
+    <p><strong>Address:</strong> 4130 Campus Dr, College Park, MD</p>
+  </div>
+</div>
+
+<!-- Details Container -->
+<div class="container" id="menu">
+  <div class="content" style="max-width:700px">
+ 
+    <h5 class="center padding-48"><span class="tag wide">DETAILS</span></h5>
+  
+    <div class="row center card padding">
+      <a href="javascript:void(0)" onclick="openMenu(event, 'Type of Litter');" id="myLink">
+        <div class="col s6 tablink">Type of Litter</div>
+      </a>
+      <a href="javascript:void(0)" onclick="openMenu(event, 'Reported/Cleaned By');">
+        <div class="col s6 tablink">Reported/Cleaned By</div>
+      </a>
+    </div>
+
+    <div id="Type of Litter" class="container menu padding-48 card">
+      <h5>All</h5>
+      <p class="text-grey">Shows every litter type</p><br>
+    
+      <h5>Plastic</h5>
+      <p class="text-grey">Shows plastic-based litter</p><br>
+    
+      <h5>Glass</h5>
+      <p class="text-grey">Shows glass-based litter</p><br>
+    
+      <h5>Metal</h5>
+      <p class="text-grey">Shows metal-based litter</p><br>
+    </div>
+
+    <div id="Reported/Cleaned By" class="container menu padding-48 card">
+      <h5>Community Bridge</h5>
+      <p class="text-grey">Community Bridge reported or cleaned litter in the area</p><br>
+    
+      <h5>DPWT</h5>
+      <p class="text-grey">DPWT reported or cleaned litter in the area</p><br>
+    
+      <h5>DOC</h5>
+      <p class="text-grey">DOC reported or cleaned litter in the area</p><br>
+    
+      <h5>DOE</h5>
+      <p class="text-grey">DOE reported or cleaned litter in the area</p><br>
+    
+      <h5>CWP</h5>
+      <p class="text-grey">CWP reported or cleaned litter in the area</p><br>
+	  
+	  <h5>DPIE</h5>
+      <p class="text-grey">DPIE reported or cleaned litter in the area</p>
+    </div>  
+  </div>
+</div>
+
+<!-- End page content -->
+</div>
+
+<!-- Footer -->
+<footer class="center light-grey padding-48 large">
+  <p></p>
+</footer>
+
+<script>
+   //Tabbed Menu
+   function openMenu(evt, menuName) {
+     var i, x, tablinks;
+     x = document.getElementsByClassName("menu");
+     for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none";
+     }
+     tablinks = document.getElementsByClassName("tablink");
+     for (i = 0; i < x.length; i++) {
+       tablinks[i].className = tablinks[i].className.replace(" dark-grey", "");
+     }
+     document.getElementById(menuName).style.display = "block";
+     evt.currentTarget.firstElementChild.className += " dark-grey";
+   }
+   document.getElementById("myLink").click();
+</script>
+
 </body>
 </html>
