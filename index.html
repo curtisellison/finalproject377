@@ -47,7 +47,7 @@
     <fieldset class="group">
     <legend>Type of Litter</legend>
       <div class="form-group" >
-        <input type="radio" name="filter" value="ltf_all" /><label>All</label>
+        <input type="radio" name="filter" value="all" onclick="loadDataByLitterType('all');" /><label>All</label>
         <input type="radio" name="filter" value="ltf_plastic" /><label>Plastic</label>
         <input type="radio" name="filter" value="ltf_glass" /><label>Glass</label>
         <input type="radio" name="filter" value="ltf_metal" /><label>Metal</label>
@@ -58,13 +58,13 @@
      <fieldset class="group">
      <legend>Organization</legend>
        <div class="form-group">
-         <input type="radio" name="filter" value="org_all" /><label>All</label>
-         <input type="radio" name="filter" value="org_community_bridge" /><label>Community Bridge</label>
-         <input type="radio" name="filter" value="org_dpwt" /><label>DPWT</label>
-         <input type="radio" name="filter" value="org_doc" /><label>DOC</label>
-         <input type="radio" name="filter" value="org_doe" /><label>DOE</label>
-         <input type="radio" name="filter" value="org_ccwp" /><label>CWP</label>
-         <input type="radio" name="filter" value="org_dpie" /><label>DPIE</label>
+         <input type="radio" name="filter" value="all" onclick="loadDataByOrganization('all');" /><label>All</label>
+         <input type="radio" name="filter" value="org_community_bridge" onclick="loadDataByOrganization('CommunityBridge');" /><label>Community Bridge</label>
+         <input type="radio" name="filter" value="org_dpwt" onclick="loadDataByOrganization('DPW&T');" /><label>DPW&T</label>
+         <input type="radio" name="filter" value="org_doc" onclick="loadDataByOrganization('DOC');" /><label>DOC</label>
+         <input type="radio" name="filter" value="org_doe" onclick="loadDataByOrganization('DOE');" /><label>DOE</label>
+         <input type="radio" name="filter" value="org_ccwp" onclick="loadDataByOrganization('CWP');" /><label>CWP</label>
+         <input type="radio" name="filter" value="org_dpie" onclick="loadDataByOrganization('DPIE');" /><label>DPIE</label>
        </div>
      </fieldset>
   </div>
@@ -72,7 +72,7 @@
      <fieldset class="group">
      <legend>Total Litter</legend>
        <div class="form-group">
-         <input type="radio" name="filter" value="tlf_all" /><label>All</label>
+         <input type="radio" name="filter" value="tlf_all" onclick="loadDataByTotalBagsLitter('all');" /><label>All</label>
          <input type="radio" name="filter" value="tlf_bags" /><label>Bags</label>
          <input type="radio" name="filter" value="tlf_tires" /><label>Tires</label>         
        </div>
@@ -84,10 +84,7 @@
 <div class="container" id="map">
   <div class="content" style="max-width:100%">
     <h5 class="center padding-64"><span class="tag wide">MAP</span></h5>
-	<div id="mapid" class="map" style="max-width:100%></div>
-   
-    <!--Implement filter buttons here -->
-  
+	<div id="mapid" class="map"></div>
   </div>
 </div>
 

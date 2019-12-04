@@ -6,7 +6,7 @@ body, html {
 .bgimg {
   background-position: center;
   background-size: cover;
-  background-image: url("trash.jpg");
+  background-image: url("images/trash.jpg");
   min-height: 25%;
 }
 
@@ -35,6 +35,7 @@ input[type="radio"]{
 }
 
 #mapid {
+	 max-width: 100%;
      height: 540px;
 }
 
