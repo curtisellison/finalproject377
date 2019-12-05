@@ -208,3 +208,39 @@ function loadDataByTotalLitter(totalLitterType) {
     	  return res;
       });
 }
+
+function openHome() {
+   var tabcontent = document.getElementById("about");   
+   tabcontent.style.display = "none";
+   tabcontent = document.getElementById("documentation");
+   tabcontent.style.display = "none";
+   
+   tabcontent = document.getElementById("wrapper");
+   tabcontent.style.display = "block";
+   tabcontent = document.getElementById("map");
+   tabcontent.style.display = "block";
+}
+
+function openAbout() {
+   var tabcontent = document.getElementById("wrapper");
+   tabcontent.style.display = "none";
+   tabcontent = document.getElementById("map");
+   tabcontent.style.display = "none";   
+   tabcontent = document.getElementById("documentation");
+   tabcontent.style.display = "none";
+   
+   tabcontent = document.getElementById("about");
+   tabcontent.style.display = "block";
+}
+
+function openDocumentation() {
+   var tabcontent = document.getElementById("wrapper");
+   tabcontent.style.display = "none";
+   tabcontent = document.getElementById("map");
+   tabcontent.style.display = "none";
+   tabcontent = document.getElementById("about");
+   tabcontent.style.display = "none";
+   
+   tabcontent = document.getElementById("documentation");
+   tabcontent.style.display = "block";
+}
