@@ -31,8 +31,9 @@ function populateLitterTypeDropDown() {
          }
       }
       
-      // Add the options to the drop-down 
+      // Add the options to the drop-down and build the documentation page
       var myselect = document.getElementById("type_filters_drop_down");
+      var mydocumentation = document.getElementById("Type of Litter");
       for (let litterType of litterTypes) {
          let opt = document.createElement('option');
          opt.appendChild(document.createTextNode(litterType));
@@ -40,6 +41,21 @@ function populateLitterTypeDropDown() {
          opt.value = litterType; 
          // add option to the end of select box
          myselect.appendChild(opt); 
+         
+         /////  Documentation - Type of Litter  /////
+         let heading = document.createElement("h5");
+         let text = document.createTextNode(litterType);
+         heading.appendChild(text);
+         mydocumentation.appendChild(heading);
+         
+         let para = document.createElement("p");
+         para.className += "text-grey";
+         text = document.createTextNode("Represents " + litterType + " litter");
+         para.appendChild(text);
+         mydocumentation.appendChild(para);
+         
+         let mybreak = document.createElement("br");
+         mydocumentation.appendChild(mybreak);
       }
       return litterTypes;
    })
