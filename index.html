@@ -12,7 +12,7 @@
 </head>
 
 
-<body onload="loadMap()">
+<body onload="loadMap(); populateLitterTypeDropDown()">
 
 <!-- Links (sit on top) -->
 <div class="top">
@@ -42,18 +42,25 @@
 <!-- Add a background color and large text to the whole page -->
 <div class="sand grayscale large">
 
+  <!-- Filter Container -->
+<div class="container" id="about">
+    <div class="content" style="max-width:700px">
+      <h5 class="center padding-small"><span class="tag wide">MAP FILTERS</span></h5>
+    </div>
+</div>
+
 <div id="wrapper">
-  <div id="litter_type_filters">
-    <fieldset class="group">
-    <legend>Type of Litter</legend>
-      <div class="form-group" >
-        <input type="radio" name="filter" value="all" onclick="loadDataByLitterType('all');" /><label>All</label>
-        <input type="radio" name="filter" value="ltf_plastic" /><label>Plastic</label>
-        <input type="radio" name="filter" value="ltf_glass" /><label>Glass</label>
-        <input type="radio" name="filter" value="ltf_metal" /><label>Metal</label>
-      </div>
-    </fieldset>
-  </div>
+   <div id="litter_type_filters">
+      <fieldset class="group">
+      <legend>Litter Type</legend>
+         <div class="form-group">
+             <select id="type_filters_drop_down" size="1" onchange="loadDataByLitterType()">
+               <option value="">None</option>
+             </select>
+         </div>
+      </fieldset>
+   </div>
+   
   <div id="organization_filters">
      <fieldset class="group">
      <legend>Organization</legend>
@@ -83,7 +90,7 @@
 <!-- Map Container -->
 <div class="container" id="map">
   <div class="content" style="max-width:100%">
-    <h5 class="center padding-64"><span class="tag wide">MAP</span></h5>
+    <h5 class="center padding-small"><span class="tag wide">MAP</span></h5>
 	<div id="mapid" class="map"></div>
   </div>
 </div>
@@ -91,7 +98,7 @@
 <!-- About Container -->
 <div class="container" id="about">
   <div class="content" style="max-width:700px">
-    <h5 class="center padding-64"><span class="tag wide">ABOUT LITTERTRACKER</span></h5>
+    <h5 class="center padding-small"><span class="tag wide">ABOUT LITTERTRACKER</span></h5>
     <p>We are a website designed to help you figure out how efficently cleaning is being done throughout PGC.</p>
     <p><strong>Contact Us:</strong> 1-800-700-3000.</p>
     <p><strong>Address:</strong> 4130 Campus Dr, College Park, MD</p>
@@ -102,7 +109,7 @@
 <div class="container" id="menu">
   <div class="content" style="max-width:700px">
  
-    <h5 class="center padding-48"><span class="tag wide">DETAILS</span></h5>
+    <h5 class="center padding-16"><span class="tag wide">DETAILS</span></h5>
   
     <div class="row center card padding">
       <a href="javascript:void(0)" onclick="openMenu(event, 'Type of Litter');" id="myLink">

@@ -11,37 +11,91 @@ function loadMap() {
    }).addTo(mymap);
 }
 
-function loadDataByLitterType(litterType) {
+function populateLitterTypeDropDown() {
+   console.log("Populating Litter Type drop-down list.");
+
+   fetch('/api')
+   .then(res => res.json())
+   .then(res => res.data.map(c => {
+      // Keep only the properties we want to use.
+      return getMapWithPropertiesNeeded(c);
+   }))
+   .then(res => {
+      var litterTypes = new Set(); // Prevents adding duplicate entries
+      for(let index = 0; index < res.length; index++) {
+         // Add the entry in lower case format. This way we won't get 
+         // two entries such as:  other and Other.
+         // Only add the entry if one of the total is greater than zero.
+         if(res[index].number_bags > 0 || res[index].total_tires > 0) {         
+            litterTypes.add(res[index].type_litter.toLowerCase());
+         }
+      }
+      
+      // Add the options to the drop-down 
+      var myselect = document.getElementById("type_filters_drop_down");
+      for (let litterType of litterTypes) {
+         let opt = document.createElement('option');
+         opt.appendChild(document.createTextNode(litterType));
+         // set value property of opt
+         opt.value = litterType; 
+         // add option to the end of select box
+         myselect.appendChild(opt); 
+      }
+      return litterTypes;
+   })
+   .then(res => {
+      console.log(res);
+      return res;
+    }); 
+}
+
+function getMapWithPropertiesNeeded(data_row) {
+   // Keep only the properties we want to use.
+   return {
+         latitude: data_row.latitude,
+         longitude: data_row.longitude,
+         organization: data_row.organization,
+         type_litter: data_row.type_litter,
+         total_bags_litter: data_row.total_bags_litter,
+         number_bags: data_row.number_bags,
+         total_tires: data_row.total_tires
+     };
+}
+
+function loadDataByLitterType() {
+   var myselect = document.getElementById("type_filters_drop_down");
+   var litterType = myselect.options[myselect.selectedIndex].value;
+   
    console.log("Filtering for Litter Type: " + litterType);
+   
+   // NOTE: The first thing we do here is clear the markers from the layer.
+   markersLayer.clearLayers();
    
    fetch('/api')
       .then(res => res.json())
       .then(res => res.data.map(c => {
-    	  return {
-              latitude: c.latitude,
-              longitude: c.longitude,
-              organization: c.organization,
-              type_litter: c.type_litter,
-              total_bags_litter: c.total_bags_litter
-          };
+         // Keep only the properties we want to use.
+         return getMapWithPropertiesNeeded(c);
       }))
       .then(res => {
-    	  var groups = [];
-    	  for(var index = 0; index < res.length; index++) {
-    		  if (typeof groups[res[index].type_litter] === 'undefined') {
-    			  groups[res[index].type_litter] = new Array();
-    		  }
-
-    		  groups[res[index].type_litter].push({
-    	  			latitude: res[index].latitude,
-    	  			longitude: res[index].longitude,
-    		  });
-    	  }
-    	  if(litterType === 'all') {
-    	     return groups;
-    	  } else {
-    	    return groups[litterType];
-    	  }
+         for(var index = 0; index < res.length; index++) {
+            var latitude = res[index].latitude;
+            var longitude = res[index].longitude;
+            if(res[index].type_litter == litterType || litterType == 'all') {
+               // Create a marker
+               var marker = L.marker([longitude, latitude]);
+               // Add a popup to the marker
+               marker.bindPopup(
+                     "<b>" + res[index].organization + "</b><br>" +
+                     "Litter Type: " + res[index].type_litter
+               ).openPopup();
+               // Add marker to the layer. Not displayed yet.
+               markersLayer.addLayer(marker);
+            }
+          }
+          // Display all the markers.
+          markersLayer.addTo(mymap);
+          return res;
       })
       .then(res => {
     	  console.log(res);
@@ -59,13 +113,7 @@ function loadDataByOrganization(organization) {
       .then(res => res.json())
       .then(res => res.data.map(c => {
          // Keep only the properties we want to use.
-    	  return {
-              latitude: c.latitude,
-              longitude: c.longitude,
-              organization: c.organization,
-              type_litter: c.type_litter,
-              total_bags_litter: c.total_bags_litter
-          };
+    	  return getMapWithPropertiesNeeded(c);
       }))
       .then(res => {
     	  for(var index = 0; index < res.length; index++) {
@@ -102,14 +150,8 @@ function loadDataByTotalLitter(totalLitterType) {
    fetch('/api')
       .then(res => res.json())
       .then(res => res.data.map(c => {
-    	  return {
-              latitude: c.latitude,
-              longitude: c.longitude,
-              organization: c.organization,
-              type_litter: c.type_litter,
-              number_bags: c.number_bags,
-              total_tires: c.total_tires,              
-          };
+         // Keep only the properties we want to use.
+         return getMapWithPropertiesNeeded(c);
       }))
       .then(res => {
          for(var index = 0; index < res.length; index++) {
