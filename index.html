@@ -12,7 +12,7 @@
 </head>
 
 
-<body onload="loadMap(); populateLitterTypeDropDown(); openHome()">
+<body onload="loadMap(); populateLitterTypeDropDown(); openHome();">
 
    <!-- Links (sit on top) -->
    <div class="top">
@@ -90,6 +90,8 @@
          </div>
       </div>
 
+      <div id="litterPerimeterId"><button type="button" onclick="loadDataForLitterPerimeter();">Litter Perimeter</button></div>
+      
       <!-- Map Container -->
       <div class="container" id="map">
          <div class="content" style="max-width: 80%">

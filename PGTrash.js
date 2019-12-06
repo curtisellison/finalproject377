@@ -255,7 +255,56 @@ function populateLitterTypeDocumentation() {
     }); 
 }
 
-
+function loadDataForLitterPerimeter() {
+   fetch('/api')
+   .then(res => res.json())
+   .then(res => res.data.map(c => {
+      // Keep only the properties we want to use.
+      return getMapWithPropertiesNeeded(c);
+   }))
+   .then(res => {
+      // Initialize all points to the center of Prince George's County
+      var northPoint = {longitude: 38.8162729, latitude: -76.7523043};
+      var southPoint = {longitude: 38.8162729, latitude: -76.7523043};
+      var westPoint = {longitude: 38.8162729, latitude: -76.7523043};
+      var eastPoint = {longitude: 38.8162729, latitude: -76.7523043};
+      
+      for(let index = 0; index < res.length; index++) {         
+         var latitude = res[index].latitude;
+         var longitude = res[index].longitude;
+         
+         // Find the highest point to the north
+         if(longitude > northPoint.longitude) {
+            northPoint.longitude = longitude;
+            northPoint.latitude = latitude;
+         }
+         // Find the lowest point to the south
+         if(longitude < southPoint.longitude) {
+            southPoint.longitude = longitude;
+            southPoint.latitude = latitude;
+         }
+         // Find the highest point to the right
+         if(latitude > eastPoint.latitude) {
+            eastPoint.longitude = longitude;
+            eastPoint.latitude = latitude;
+         }
+         // Find the lowest point to the left
+         if(latitude < westPoint.latitude) {
+            westPoint.longitude = longitude;
+            westPoint.latitude = latitude;
+         }
+      }
+      var polygon = L.polygon([
+         [northPoint.longitude, northPoint.latitude],
+         [eastPoint.longitude, eastPoint.latitude],
+         [southPoint.longitude, southPoint.latitude],         
+         [westPoint.longitude, westPoint.latitude]
+         ]);
+     markersLayer.addLayer(polygon);
+     // Display all the markers.
+     markersLayer.addTo(mymap);
+   }); 
+}
 
 function openHome() {
    var tabcontent = document.getElementById("about");   
