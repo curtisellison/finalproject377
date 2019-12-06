@@ -9,14 +9,19 @@
 </head>
 
 <body onload="populateLitterTypeDocumentation()"
-   style="overflow-y: auto; overflow-x: auto; width: 60%">
+   style="overflow-y: auto; overflow-x: auto; width: 80%">
    <div class="row center card padding">
       <a href="javascript:void(0)" onclick="openMenu(event, 'Type of Litter');"
          id="myLink">
-         <div class="col s6 tablink">Type of Litter</div>
-      </a> <a href="javascript:void(0)"
+         <div class="col s4 tablink">Type of Litter</div>
+      </a>
+      <a href="javascript:void(0)"
          onclick="openMenu(event, 'Reported/Cleaned By');">
-         <div class="col s6 tablink">Reported/Cleaned By</div>
+         <div class="col s4 tablink">Reported/Cleaned By</div>
+      </a>
+      <a href="javascript:void(0)"
+         onclick="openMenu(event, 'Total Litter');">
+         <div class="col s4 tablink">Total Litter</div>
       </a>
    </div>
 
@@ -50,6 +55,19 @@
       <p class="text-grey">DPIE reported or cleaned litter in the area</p>
    </div>
 
+   <div id="Total Litter" class="container menu padding-48 card">
+      <h5>All</h5>
+      <p class="text-grey">Shows all bags and tires</p>
+      <br>
+
+      <h5>Bags</h5>
+      <p class="text-grey">Shows the total number of trash bags at each point</p>
+      <br>
+
+      <h5>Tires</h5>
+      <p class="text-grey">Shows the total number of tires at each point</p>
+   </div>
+   
    <script>
             //Tabbed Menu
             function openMenu(evt, menuName) {
