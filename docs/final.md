@@ -1,7 +1,7 @@
 # final.md
 Title: LitterTracker <br/>
 Team Members: Andres Sandin, Curtis Ellison Jr., Thomas Saunders, Thomas Nguyen <br/>
-Link to App:   <br/>
+Link to App: https://littertracker.herokuapp.com/  <br/>
 Information problem we're trying to solve: Providing knowledge to the public regarding which PGC areas put in the least effort in terms of clean up. In doing so, we hope to promote more widespread efforts to clean the community. <br/>
 Chosen Strategies and Solutions to the problem: To provide an app (LitterTracker) which compares the trash collection in different areas. <br/>
 Identified Stakeholders: The residents of PGC, the clean up organizations, PGC Council (Specifically TIEE committee members)  <br/>
