@@ -1,5 +1,5 @@
 var mymap;
-var markersLayer = new L.LayerGroup();
+var markersLayer;
 
 function loadMap() {
    mymap = L.map('mapid').setView([38.8162729,-76.7523043], 13);   
@@ -9,6 +9,7 @@ function loadMap() {
        id: 'mapbox/streets-v11',
        accessToken: 'pk.eyJ1IjoiYXNhbmRpbjIxOCIsImEiOiJjazNwZm5kZDEwMm5qM3BwZTVwcmJvNGtpIn0.Omg_ZXfDgjgWA2-Lukxfow'
    }).addTo(mymap);
+   markersLayer = new L.LayerGroup();
 }
 
 function populateLitterTypeDropDown() {
@@ -23,17 +24,16 @@ function populateLitterTypeDropDown() {
    .then(res => {
       var litterTypes = new Set(); // Prevents adding duplicate entries
       for(let index = 0; index < res.length; index++) {
-         // Add the entry in lower case format. This way we won't get 
-         // two entries such as:  other and Other.
+         // Add the entry in lower case format. This way we won't get
+         // two entries such as: other and Other.
          // Only add the entry if one of the total is greater than zero.
-         if(res[index].number_bags > 0 || res[index].total_tires > 0) {         
+         if(res[index].number_bags > 0 || res[index].total_tires > 0) {            
             litterTypes.add(res[index].type_litter.toLowerCase());
          }
       }
       
       // Add the options to the drop-down and build the documentation page
       var myselect = document.getElementById("type_filters_drop_down");
-      var mydocumentation = document.getElementById("Type of Litter");
       for (let litterType of litterTypes) {
          let opt = document.createElement('option');
          opt.appendChild(document.createTextNode(litterType));
@@ -41,21 +41,6 @@ function populateLitterTypeDropDown() {
          opt.value = litterType; 
          // add option to the end of select box
          myselect.appendChild(opt); 
-         
-         /////  Documentation - Type of Litter  /////
-         let heading = document.createElement("h5");
-         let text = document.createTextNode(litterType);
-         heading.appendChild(text);
-         mydocumentation.appendChild(heading);
-         
-         let para = document.createElement("p");
-         para.className += "text-grey";
-         text = document.createTextNode("Represents " + litterType + " litter");
-         para.appendChild(text);
-         mydocumentation.appendChild(para);
-         
-         let mybreak = document.createElement("br");
-         mydocumentation.appendChild(mybreak);
       }
       return litterTypes;
    })
@@ -225,6 +210,53 @@ function loadDataByTotalLitter(totalLitterType) {
       });
 }
 
+function populateLitterTypeDocumentation() {
+   console.log("Populating Litter Type documentation.");
+
+   fetch('/api')
+   .then(res => res.json())
+   .then(res => res.data.map(c => {
+      // Keep only the properties we want to use.
+      return getMapWithPropertiesNeeded(c);
+   }))
+   .then(res => {
+      var litterTypes = new Set(); // Prevents adding duplicate entries
+      for(let index = 0; index < res.length; index++) {
+         // Add the entry in lower case format. This way we won't get
+         // two entries such as: other and Other.
+         // Only add the entry if one of the total is greater than zero.
+         if(res[index].number_bags > 0 || res[index].total_tires > 0) {         
+            litterTypes.add(res[index].type_litter.toLowerCase());
+         }
+      }
+      
+      var mydocumentation = document.getElementById("Type of Litter");
+      for (let litterType of litterTypes) {
+
+         let heading = document.createElement("h5");
+         let text = document.createTextNode(litterType);
+         heading.appendChild(text);
+         mydocumentation.appendChild(heading);
+         
+         let para = document.createElement("p");
+         para.className += "text-grey";
+         text = document.createTextNode("Represents " + litterType + " litter");
+         para.appendChild(text);
+         mydocumentation.appendChild(para);
+         
+         let mybreak = document.createElement("br");
+         mydocumentation.appendChild(mybreak);
+      }
+      return litterTypes;
+   })
+   .then(res => {
+      console.log(res);
+      return res;
+    }); 
+}
+
+
+
 function openHome() {
    var tabcontent = document.getElementById("about");   
    tabcontent.style.display = "none";
@@ -247,6 +279,8 @@ function openAbout() {
    
    tabcontent = document.getElementById("about");
    tabcontent.style.display = "block";
+   
+   loadAboutPage(); 
 }
 
 function openDocumentation() {
@@ -259,4 +293,14 @@ function openDocumentation() {
    
    tabcontent = document.getElementById("documentation");
    tabcontent.style.display = "block";
+   
+   loadDocumentationPage();
+}
+
+function loadAboutPage() {
+   document.getElementById("about").innerHTML='<object type="text/html" data="about.html" width="100%"></object>';   
+}
+
+function loadDocumentationPage() {
+   document.getElementById("documentation").innerHTML='<object type="text/html" data="documentation.html" width="100%" height="400px"></object>';
 }

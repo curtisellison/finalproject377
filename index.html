@@ -2,160 +2,120 @@
 <html>
 <head>
 <title>LitterTracker</title>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1">
-   <link type="text/css" rel="stylesheet" href="styles.css">
-   <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link type="text/css" rel="stylesheet" href="styles.css">
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
    crossorigin=""></script>
-   <script src="PGTrash.js"></script>
+<script src="PGTrash.js"></script>
 </head>
 
 
 <body onload="loadMap(); populateLitterTypeDropDown(); openHome()">
 
-<!-- Links (sit on top) -->
-<div class="top">
-  <div class="row padding black">
-    <div class="col s4">
-      <a href="#" class="button block black" onclick="openHome()">HOME</a>
-    </div>
-    <div class="col s4">
-      <a href="#about" class="button block black" onclick="openAbout()">ABOUT</a>
-    </div>
-    <div class="col s4">
-      <a href="#menu" class="button block black" onclick="openDocumentation()">DOCUMENTATION</a>
-    </div>
-  </div>
-</div>
-
-<!-- Header with image -->
-<header class="bgimg display-container grayscale-min" id="home">
-  <div class="display-middle center">
-    <span class="text-white" style="font-size:90px;font-weight: bold;background-color: white">LitterTracker</span>
-  </div>
-</header>
-
-<!-- Add a background color and large text to the whole page -->
-<div class="sand grayscale large">
-
-<div id="wrapper">
-   <div id="litter_type_filters">
-      <fieldset class="group">
-      <legend>Litter Type</legend>
-         <div class="form-group">
-             <select id="type_filters_drop_down" size="1" onchange="loadDataByLitterType()">
-               <option value="">None</option>
-             </select>
+   <!-- Links (sit on top) -->
+   <div class="top">
+      <div class="row padding black">
+         <div class="col s4">
+            <a href="#" class="button block black" onclick="openHome()">HOME</a>
          </div>
-      </fieldset>
+         <div class="col s4">
+            <a href="#about" class="button block black" onclick="openAbout()">ABOUT</a>
+         </div>
+         <div class="col s4">
+            <a href="#menu" class="button block black"
+               onclick="openDocumentation()">DOCUMENTATION</a>
+         </div>
+      </div>
    </div>
-   
-  <div id="organization_filters">
-     <fieldset class="group">
-     <legend>Organization</legend>
-       <div class="form-group">
-         <input type="radio" name="filter" value="all" onclick="loadDataByOrganization('all');" /><label>All</label>
-         <input type="radio" name="filter" value="org_community_bridge" onclick="loadDataByOrganization('CommunityBridge');" /><label>Community Bridge</label>
-         <input type="radio" name="filter" value="org_dpwt" onclick="loadDataByOrganization('DPW&T');" /><label>DPW&T</label>
-         <input type="radio" name="filter" value="org_doc" onclick="loadDataByOrganization('DOC');" /><label>DOC</label>
-         <input type="radio" name="filter" value="org_doe" onclick="loadDataByOrganization('DOE');" /><label>DOE</label>
-         <input type="radio" name="filter" value="org_ccwp" onclick="loadDataByOrganization('CWP');" /><label>CWP</label>
-         <input type="radio" name="filter" value="org_dpie" onclick="loadDataByOrganization('DPIE');" /><label>DPIE</label>
-       </div>
-     </fieldset>
-  </div>
-  <div id="total_litter_filters">
-     <fieldset class="group">
-     <legend>Total Litter</legend>
-       <div class="form-group">
-         <input type="radio" name="filter" value="tlf_all" onclick="loadDataByTotalLitter('all');" /><label>All</label>
-         <input type="radio" name="filter" value="tlf_bags" onclick="loadDataByTotalLitter('number_bags');" /><label>Bags</label>
-         <input type="radio" name="filter" value="tlf_tires" onclick="loadDataByTotalLitter('total_tires');" /><label>Tires</label>         
-       </div>
-     </fieldset>
-  </div>
-</div>
 
-<!-- Map Container -->
-<div class="container" id="map">
-  <div class="content" style="max-width:80%">
-	<div id="mapid" class="map"></div>
-  </div>
-</div>
+   <!-- Header with image -->
+   <header class="bgimg display-container grayscale-min" id="home">
+      <div class="display-middle center">
+         <span class="text-white"
+            style="font-size: 90px; font-weight: bold; background-color: white">LitterTracker</span>
+      </div>
+   </header>
 
-<!-- About Container -->
-<div class="container" id="about">
-  <div class="content" style="max-width:700px">
-    <p>We are a website designed to help you figure out how efficently cleaning is being done throughout PGC.</p>
-    <p><strong>Contact Us:</strong> 1-800-700-3000.</p>
-    <p><strong>Address:</strong> 4130 Campus Dr, College Park, MD</p>
-  </div>
-</div>
+   <!-- Add a background color and large text to the whole page -->
+   <div class="sand grayscale large">
 
-<!-- Documentation Container -->
-<div class="container" id="documentation">
-  <div class="content" style="max-width:700px">
-    <div class="row center card padding">
-      <a href="javascript:void(0)" onclick="openMenu(event, 'Type of Litter');" id="myLink">
-        <div class="col s6 tablink">Type of Litter</div>
-      </a>
-      <a href="javascript:void(0)" onclick="openMenu(event, 'Reported/Cleaned By');">
-        <div class="col s6 tablink">Reported/Cleaned By</div>
-      </a>
-    </div>
+      <div id="wrapper">
+         <div id="litter_type_filters">
+            <fieldset class="group">
+               <legend>Litter Type</legend>
+               <div class="form-group">
+                  <select id="type_filters_drop_down" size="1"
+                     onchange="loadDataByLitterType()">
+                     <option value="">None</option>
+                  </select>
+               </div>
+            </fieldset>
+         </div>
 
-    <div id="Type of Litter" class="container menu padding-48 card">
-      <!-- This section will be populated by one of the javascript functions -->      
-    </div>
+         <div id="organization_filters">
+            <fieldset class="group">
+               <legend>Organization</legend>
+               <div class="form-group">
+                  <input type="radio" name="filter" value="all"
+                     onclick="loadDataByOrganization('all');" /><label>All</label>
+                  <input type="radio" name="filter" value="org_community_bridge"
+                     onclick="loadDataByOrganization('CommunityBridge');" /><label>Community
+                     Bridge</label> <input type="radio" name="filter" value="org_dpwt"
+                     onclick="loadDataByOrganization('DPW&T');" /><label>DPW&T</label>
+                  <input type="radio" name="filter" value="org_doc"
+                     onclick="loadDataByOrganization('DOC');" /><label>DOC</label>
+                  <input type="radio" name="filter" value="org_doe"
+                     onclick="loadDataByOrganization('DOE');" /><label>DOE</label>
+                  <input type="radio" name="filter" value="org_ccwp"
+                     onclick="loadDataByOrganization('CWP');" /><label>CWP</label>
+                  <input type="radio" name="filter" value="org_dpie"
+                     onclick="loadDataByOrganization('DPIE');" /><label>DPIE</label>
+               </div>
+            </fieldset>
+         </div>
+         <div id="total_litter_filters">
+            <fieldset class="group">
+               <legend>Total Litter</legend>
+               <div class="form-group">
+                  <input type="radio" name="filter" value="tlf_all"
+                     onclick="loadDataByTotalLitter('all');" /><label>All</label>
+                  <input type="radio" name="filter" value="tlf_bags"
+                     onclick="loadDataByTotalLitter('number_bags');" /><label>Bags</label>
+                  <input type="radio" name="filter" value="tlf_tires"
+                     onclick="loadDataByTotalLitter('total_tires');" /><label>Tires</label>
+               </div>
+            </fieldset>
+         </div>
+      </div>
 
-    <div id="Reported/Cleaned By" class="container menu padding-48 card">
-      <h5>Community Bridge</h5>
-      <p class="text-grey">Community Bridge reported or cleaned litter in the area</p><br>
-    
-      <h5>DPWT</h5>
-      <p class="text-grey">DPWT reported or cleaned litter in the area</p><br>
-    
-      <h5>DOC</h5>
-      <p class="text-grey">DOC reported or cleaned litter in the area</p><br>
-    
-      <h5>DOE</h5>
-      <p class="text-grey">DOE reported or cleaned litter in the area</p><br>
-    
-      <h5>CWP</h5>
-      <p class="text-grey">CWP reported or cleaned litter in the area</p><br>
-	  
-	  <h5>DPIE</h5>
-      <p class="text-grey">DPIE reported or cleaned litter in the area</p>
-    </div>  
-  </div>
-</div>
+      <!-- Map Container -->
+      <div class="container" id="map">
+         <div class="content" style="max-width: 80%">
+            <div id="mapid" class="map"></div>
+         </div>
+      </div>
 
-<!-- End page content -->
-</div>
 
-<!-- Footer -->
-<footer class="center light-grey padding-48 large">
-  <p></p>
-</footer>
+      <!-- About Container -->
+      <div class="container">
+         <div class="content" id="about" style="max-width: 50%" />
+      </div>
 
-<script>
-   //Tabbed Menu
-   function openMenu(evt, menuName) {
-     var i, x, tablinks;
-     x = document.getElementsByClassName("menu");
-     for (i = 0; i < x.length; i++) {
-       x[i].style.display = "none";
-     }
-     tablinks = document.getElementsByClassName("tablink");
-     for (i = 0; i < x.length; i++) {
-       tablinks[i].className = tablinks[i].className.replace(" dark-grey", "");
-     }
-     document.getElementById(menuName).style.display = "block";
-     evt.currentTarget.firstElementChild.className += " dark-grey";
-   }
-   document.getElementById("myLink").click();
-</script>
+
+      <!-- Documentation Container -->
+      <div class="container">
+         <div class="content" id="documentation" style="max-width: 100%;" />
+      </div>
+
+      <!-- End page content -->
+   </div>
+
+   <!-- Footer -->
+   <footer class="center light-grey padding-48 large">
+      <p></p>
+   </footer>
 
 </body>
 </html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>LitterTracker - About</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link type="text/css" rel="stylesheet" href="styles.css">
+<script src="PGTrash.js"></script>
+</head>
+
+<body onload="populateLitterTypeDocumentation()"
+   style="overflow-y: auto; overflow-x: auto; width: 60%">
+   <div class="row center card padding">
+      <a href="javascript:void(0)" onclick="openMenu(event, 'Type of Litter');"
+         id="myLink">
+         <div class="col s6 tablink">Type of Litter</div>
+      </a> <a href="javascript:void(0)"
+         onclick="openMenu(event, 'Reported/Cleaned By');">
+         <div class="col s6 tablink">Reported/Cleaned By</div>
+      </a>
+   </div>
+
+   <div id="Type of Litter" class="container menu padding-48 card">
+      <!-- This section will be populated by one of the javascript functions -->
+   </div>
+
+   <div id="Reported/Cleaned By" class="container menu padding-48 card">
+      <h5>Community Bridge</h5>
+      <p class="text-grey">Community Bridge reported or cleaned litter in
+         the area</p>
+      <br>
+
+      <h5>DPWT</h5>
+      <p class="text-grey">DPWT reported or cleaned litter in the area</p>
+      <br>
+
+      <h5>DOC</h5>
+      <p class="text-grey">DOC reported or cleaned litter in the area</p>
+      <br>
+
+      <h5>DOE</h5>
+      <p class="text-grey">DOE reported or cleaned litter in the area</p>
+      <br>
+
+      <h5>CWP</h5>
+      <p class="text-grey">CWP reported or cleaned litter in the area</p>
+      <br>
+
+      <h5>DPIE</h5>
+      <p class="text-grey">DPIE reported or cleaned litter in the area</p>
+   </div>
+
+   <script>
+            //Tabbed Menu
+            function openMenu(evt, menuName) {
+               var i, x, tablinks;
+               x = document.getElementsByClassName("menu");
+               for (i = 0; i < x.length; i++) {
+                  x[i].style.display = "none";
+               }
+               tablinks = document.getElementsByClassName("tablink");
+               for (i = 0; i < x.length; i++) {
+                  tablinks[i].className = tablinks[i].className.replace(
+                        " dark-grey", "");
+               }
+               document.getElementById(menuName).style.display = "block";
+               evt.currentTarget.firstElementChild.className += " dark-grey";
+            }
+            document.getElementById("myLink").click();
+         </script>
+</body>
+</html>
