@@ -16,19 +16,16 @@ function populateLitterTypeDropDown() {
    console.log("Populating Litter Type drop-down list.");
 
    fetch('/api')
-   .then(res => res.json())
-   .then(res => res.data.map(c => {
-      // Keep only the properties we want to use.
-      return getMapWithPropertiesNeeded(c);
-   }))
+   .then(res => res.json())   
    .then(res => {
+      var data = res.data;
       var litterTypes = new Set(); // Prevents adding duplicate entries
-      for(let index = 0; index < res.length; index++) {
+      for(let index = 0; index < data.length; index++) {
          // Add the entry in lower case format. This way we won't get
          // two entries such as: other and Other.
          // Only add the entry if one of the total is greater than zero.
-         if(res[index].number_bags > 0 || res[index].total_tires > 0) {            
-            litterTypes.add(res[index].type_litter.toLowerCase());
+         if(data[index].number_bags > 0 || data[index].total_tires > 0) {            
+            litterTypes.add(data[index].type_litter.toLowerCase());
          }
       }
       
@@ -50,19 +47,6 @@ function populateLitterTypeDropDown() {
     }); 
 }
 
-function getMapWithPropertiesNeeded(data_row) {
-   // Keep only the properties we want to use.
-   return {
-         latitude: data_row.latitude,
-         longitude: data_row.longitude,
-         organization: data_row.organization,
-         type_litter: data_row.type_litter,
-         total_bags_litter: data_row.total_bags_litter,
-         number_bags: data_row.number_bags,
-         total_tires: data_row.total_tires
-     };
-}
-
 function loadDataByLitterType() {
    var myselect = document.getElementById("type_filters_drop_down");
    var litterType = myselect.options[myselect.selectedIndex].value;
@@ -73,22 +57,19 @@ function loadDataByLitterType() {
    markersLayer.clearLayers();
    
    fetch('/api')
-      .then(res => res.json())
-      .then(res => res.data.map(c => {
-         // Keep only the properties we want to use.
-         return getMapWithPropertiesNeeded(c);
-      }))
+      .then(res => res.json())      
       .then(res => {
-         for(var index = 0; index < res.length; index++) {
-            var latitude = res[index].latitude;
-            var longitude = res[index].longitude;
-            if(res[index].type_litter == litterType || litterType == 'all') {
+         var data = res.data;
+         for(var index = 0; index < data.length; index++) {
+            var latitude = data[index].latitude;
+            var longitude = data[index].longitude;
+            if(data[index].type_litter == litterType || litterType == 'all') {
                // Create a marker
                var marker = L.marker([longitude, latitude]);
                // Add a popup to the marker
                marker.bindPopup(
-                     "<b>" + res[index].organization + "</b><br>" +
-                     "Litter Type: " + res[index].type_litter
+                     "<b>" + data[index].organization + "</b><br>" +
+                     "Litter Type: " + data[index].type_litter
                ).openPopup();
                // Add marker to the layer. Not displayed yet.
                markersLayer.addLayer(marker);
@@ -96,7 +77,7 @@ function loadDataByLitterType() {
           }
           // Display all the markers.
           markersLayer.addTo(mymap);
-          return res;
+          return data;
       })
       .then(res => {
     	  console.log(res);
@@ -110,31 +91,33 @@ function loadDataByOrganization(organization) {
    // NOTE: The first thing we do here is clear the markers from the layer.
    markersLayer.clearLayers();
    
-   fetch('/api')
-      .then(res => res.json())
-      .then(res => res.data.map(c => {
-         // Keep only the properties we want to use.
-    	  return getMapWithPropertiesNeeded(c);
-      }))
+   var api = "/api/organization";
+   if(organization != 'all') {
+      // Need to escape the "&" to %26 because it is a reserve character in the URL
+      api = api + "?filter=" + organization.replace("&", "%26");
+   }
+   
+   fetch(api)
+      .then(res => res.json())      
       .then(res => {
-    	  for(var index = 0; index < res.length; index++) {
-    	    var latitude = res[index].latitude;
-    	    var longitude = res[index].longitude;
-    	    if(res[index].organization == organization || organization == 'all') {
-    	       // Create a marker
-    	       var marker = L.marker([longitude, latitude]);
-    	       // Add a popup to the marker
-    	       marker.bindPopup(
-    	             "<b>" + res[index].organization + "</b><br>" +
-    	             "Litter Type: " + res[index].type_litter
-    	       ).openPopup();
-    	       // Add marker to the layer. Not displayed yet.
-    	       markersLayer.addLayer(marker);
-    	    }
+        var data = res.data;
+    	  for(var index = 0; index < data.length; index++) {
+    	    var latitude = data[index].latitude;
+    	    var longitude = data[index].longitude;
+
+ 	       // Create a marker
+ 	       var marker = L.marker([longitude, latitude]);
+ 	       // Add a popup to the marker
+ 	       marker.bindPopup(
+ 	             "<b>" + data[index].organization + "</b><br>" +
+ 	             "Litter Type: " + data[index].type_litter
+ 	       ).openPopup();
+ 	       // Add marker to the layer. Not displayed yet.
+ 	       markersLayer.addLayer(marker);
     	  }
     	  // Display all the markers.
     	  markersLayer.addTo(mymap);
-    	  return res;
+    	  return data;
       })
       .then(res => {
     	  console.log(res);
@@ -149,30 +132,27 @@ function loadDataByTotalLitter(totalLitterType) {
    markersLayer.clearLayers();
    
    fetch('/api')
-      .then(res => res.json())
-      .then(res => res.data.map(c => {
-         // Keep only the properties we want to use.
-         return getMapWithPropertiesNeeded(c);
-      }))
+      .then(res => res.json())      
       .then(res => {
-         for(var index = 0; index < res.length; index++) {
+         var data = res.data;
+         for(var index = 0; index < data.length; index++) {
             var circle;
-            var latitude = res[index].latitude;
-            var longitude = res[index].longitude;
+            var latitude = data[index].latitude;
+            var longitude = data[index].longitude;
             
             if(totalLitterType == 'number_bags' || totalLitterType == 'all') {
-               if(res[index].number_bags > 0) {
+               if(data[index].number_bags > 0) {
                   circle = L.circle([longitude, latitude], {
                      color: 'red',
                      fillColor: '#f03',
                      fillOpacity: 0.5,
-                     radius: res[index].number_bags * 50
+                     radius: data[index].number_bags * 50
                   });
                   
                   // Add a popup to the circle
                   circle.bindPopup(
-                        "<b>" + res[index].organization + "</b><br>" +
-                        "Total Bags: " + res[index].number_bags
+                        "<b>" + data[index].organization + "</b><br>" +
+                        "Total Bags: " + data[index].number_bags
                   ).openPopup();
                   
                   // Add marker to the layer. Not displayed yet.
@@ -181,18 +161,18 @@ function loadDataByTotalLitter(totalLitterType) {
             } 
             
             if(totalLitterType == 'total_tires' || totalLitterType == 'all') {
-               if(res[index].total_tires > 0) {
+               if(data[index].total_tires > 0) {
                   circle = L.circle([longitude, latitude], {
                      color: 'blue',
                      fillColor: '#00f',
                      fillOpacity: 0.5,
-                     radius: res[index].total_tires * 50
+                     radius: data[index].total_tires * 50
                   });
                   
                   // Add a popup to the circle
                   circle.bindPopup(
-                        "<b>" + res[index].organization + "</b><br>" +
-                        "Total Tires: " + res[index].total_tires
+                        "<b>" + data[index].organization + "</b><br>" +
+                        "Total Tires: " + data[index].total_tires
                   ).openPopup();
                   
                   // Add marker to the layer. Not displayed yet.
@@ -202,7 +182,7 @@ function loadDataByTotalLitter(totalLitterType) {
          }
          // Display all the markers.
          markersLayer.addTo(mymap);
-         return res;
+         return data;
       })
       .then(res => {
     	  console.log(res);
@@ -215,18 +195,15 @@ function populateLitterTypeDocumentation() {
 
    fetch('/api')
    .then(res => res.json())
-   .then(res => res.data.map(c => {
-      // Keep only the properties we want to use.
-      return getMapWithPropertiesNeeded(c);
-   }))
    .then(res => {
+      var data = res.data;
       var litterTypes = new Set(); // Prevents adding duplicate entries
-      for(let index = 0; index < res.length; index++) {
+      for(let index = 0; index < data.length; index++) {
          // Add the entry in lower case format. This way we won't get
          // two entries such as: other and Other.
          // Only add the entry if one of the total is greater than zero.
-         if(res[index].number_bags > 0 || res[index].total_tires > 0) {         
-            litterTypes.add(res[index].type_litter.toLowerCase());
+         if(data[index].number_bags > 0 || data[index].total_tires > 0) {         
+            litterTypes.add(data[index].type_litter.toLowerCase());
          }
       }
       
@@ -257,21 +234,18 @@ function populateLitterTypeDocumentation() {
 
 function loadDataForLitterPerimeter() {
    fetch('/api')
-   .then(res => res.json())
-   .then(res => res.data.map(c => {
-      // Keep only the properties we want to use.
-      return getMapWithPropertiesNeeded(c);
-   }))
+   .then(res => res.json())  
    .then(res => {
+      var data = res.data;
       // Initialize all points to the center of Prince George's County
       var northPoint = {longitude: 38.8162729, latitude: -76.7523043};
       var southPoint = {longitude: 38.8162729, latitude: -76.7523043};
       var westPoint = {longitude: 38.8162729, latitude: -76.7523043};
       var eastPoint = {longitude: 38.8162729, latitude: -76.7523043};
       
-      for(let index = 0; index < res.length; index++) {         
-         var latitude = res[index].latitude;
-         var longitude = res[index].longitude;
+      for(let index = 0; index < data.length; index++) {         
+         var latitude = data[index].latitude;
+         var longitude = data[index].longitude;
          
          // Find the highest point to the north
          if(longitude > northPoint.longitude) {
