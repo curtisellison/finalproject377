@@ -1,5 +1,8 @@
-# finalproject377
-# INST377's final stand.
-# Created by Thomas Saunders, Andresito Sandin, Curtis Ellison, and Thomas Nguyen
+Title of Project: LitterTracker
+Description of Project: Helps visually represent how efficiently cleaning is being done throughout PGC
+Link to App: 
+Target Browsers:
+Link to User Manual:
+Link to Developer Manual:
 
-# Current Status - 3 HTML Pages, 1 CSS Page, 1 Server, 1 Javascript Page, 1 JSON Page
+# Developer Manual
