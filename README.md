@@ -21,4 +21,12 @@ Link to Developer Manual:  <br/>
   </ol>
 <h1>How to run tests </h1>
 <h1>The API for the server application </h1>  
+  <ol>
+    <li>To return all of the data points</li>
+      <ul> http://localhost/api </ul>
+    <li>To return all of the organizations</li>
+      <ul> http://localhost/api/organization </ul>
+    <li>To return the organization that matches the filter (Below is DOC org example)</li>
+      <ul> http://localhost/api/organization?filter=DOC </ul>
+  </ol>
 <h1>Any expectations around known bugs and road-map for future development </h1>
