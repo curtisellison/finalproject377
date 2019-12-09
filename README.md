@@ -20,6 +20,11 @@ Link to Developer Manual: See below. <br/>
     <li>Open browser and connect to the local host</li>
   </ol>
 <h1>How to run tests </h1>
+  <ol>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ol>
 <h1>The API for the server application </h1>  
   <ol>
     <li>To return all of the data points</li>
@@ -30,3 +35,5 @@ Link to Developer Manual: See below. <br/>
       <ul> http://localhost/api/organization?filter=DOC </ul>
   </ol>
 <h1>Any expectations around known bugs and road-map for future development </h1>
+  <p>There are no known bugs right now. Future development would spread our map to other counties, which may cause a bug
+  if the map becomes too large. It would be bad if the map was so big that the user could not distinguish any of the litter points. </p>
