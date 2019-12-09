@@ -21,9 +21,7 @@ Link to Developer Manual: See below. <br/>
   </ol>
 <h1>How to run tests </h1>
   <ol>
-    <li></li>
-    <li></li>
-    <li></li>
+    <li>Executing npm start will test the application and return back any errors before launching it</li>
   </ol>
 <h1>The API for the server application </h1>  
   <ol>
