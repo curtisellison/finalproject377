@@ -3,7 +3,7 @@ Description of Project: Helps visually represent how efficiently cleaning is bei
 Link to App: https://littertracker.herokuapp.com/ <br/>
 Target Browsers: Google Chrome, Mozilla Firefox, Safari, Microsoft Edge <br/>
 Link to User Manual: https://github.com/curtisellison/finalproject377/blob/master/docs/user.md <br/>
-Link to Developer Manual:  <br/>
+Link to Developer Manual: See below. <br/>
 
 # Developer Manual
 <h1>How to install application and all dependencies</h1>
