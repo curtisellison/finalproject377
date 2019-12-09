@@ -1,8 +1,8 @@
 Title of Project: LitterTracker <br/>
 Description of Project: Helps visually represent how efficiently cleaning is being done throughout PGC <br/>
 Link to App: https://littertracker.herokuapp.com/ <br/>
-Target Browsers:  <br/>
-Link to User Manual: <br/>
+Target Browsers: Google Chrome, Mozilla Firefox, Safari, Microsoft Edge <br/>
+Link to User Manual: https://github.com/curtisellison/finalproject377/blob/master/docs/user.md <br/>
 Link to Developer Manual:  <br/>
 
 # Developer Manual
