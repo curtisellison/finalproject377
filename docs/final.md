@@ -12,7 +12,7 @@
 <h1>Identified Stakeholders</h1>
   <p>The residents of PGC, the clean up organizations, PGC Council (Specifically TIEE committee members)  </p>
 <h1>Target Browsers </h1>
-  <p>  </p>
+  <p>Google Chrome, Mozilla Firefox, Safari, Microsoft Edge  </p>
 <h1>Data we worked with</h1>
   <p>https://data.princegeorgescountymd.gov/Environment/LitterTRAK/9tsa-iner </p>
 <h1>Technical System Decision Rationale</h1>
@@ -20,6 +20,6 @@
 <h1>How Final System Helps Address the Problem</h1>
   <p>The final system enables users to filter by litter type, organization, or total litter. It even lets users map an average perimeter of where trash is being collected in PGC. All of this results in public obtaining a greater knowledge of trash in PGC. </p>
 <h1>Challenges Faced and Impact on Final Design  </h1>
-  <p>  </p>
+  <p>We had trouble matching our initial wireframe. So we picked a template off W3Schools: https://www.w3schools.com/w3css/tryw3css_templates_cafe.htm. We also lost a team member when he dropped the class. Our schedules and responsibilities got messed up, but we recovered.  </p>
 <h1>Possible Future Work Directions with this Problem</h1>
   <p>Possibly expand this from being an app that maps trash collection in PGC to one that maps other counties in Maryland </p>
